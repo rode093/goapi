@@ -16,18 +16,17 @@ func Run(config map[string]string){
 		log.Fatal("DB is not configured.");
 		return;
 	}
-	err := ConnectDB(config["DSN"]);
+	db,err := ConnectDB(config["DSN"], config["SCHEMA"]);
 	if(err!=nil){
 		log.Fatal("Failed to connect to Database Server")
 		return;
 	}
-	if DB != nil{
+	if db != nil{
 		log.Println("Connected to Databse Server");
+		dbConnection, _ := db.DB();
+		defer dbConnection.Close();
 	}
 		
 	http.ListenAndServe(":8000", router.InitRouter())
 
 }
-
-
-

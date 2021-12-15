@@ -17,7 +17,7 @@ func main()  {
 	args := os.Args[1:];
 
 	if args[0]=="migrate"{
-		database.MigrateDB(cfg["DSN"]);
+		database.MigrateDB(cfg["DSN"], cfg["SCHEMA"]);
 		return;
 	}
 	
